@@ -1,0 +1,31 @@
+rrn: Regular expression ReName - v0.9.1 (2009-05-25)
+Copyright 2009 by Nathan Roberts <nroberts@tardislabs.com>
+
+rrn is a program that renames files using regular expressions. It is
+similar to programs such as 'rename' and 'prename' but with more 
+functionality.
+
+rrn is written in Perl, and should run under any system that has Perl
+5.8 installed.  Earlier versions may work but have not been tested.
+
+INSTALLATION
+
+Copy rrn.pl to an appropriate bin directory (such as /usr/local/bin),
+rename it to 'rrn' (without the .pl) and chmod a+x rrn
+
+Copy rrn.1 to an appropriate man directory (such as /usr/local/man/man1)
+
+Optionally copy other documentation to some appropriate directory
+
+Ideally this should be automated, but I can't figure out the 'accepted' way
+to do this
+
+DOCUMENTATION
+
+See the rrn(1) manpage, or the text or HTML versions of same in rrn.txt or
+rrn.html, respectively.
+
+LICENSE
+
+rrn is licensed under the GPL.  See the 'LICENSE' file for details.
+
