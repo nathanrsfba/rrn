@@ -4,233 +4,232 @@
 <head>
 <title>Regular Expression Rename</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rev="made" href="mailto:root@localhost" />
+<link rev="made" href="mailto:root@z-mp.slackware.lan" />
 </head>
 
-<body style="background-color: white">
+<body>
 
 
-<!-- INDEX BEGIN -->
-<div name="index">
-<p><a name="__index__"></a></p>
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#OPTIONS">OPTIONS</a></li>
+  <li><a href="#DIAGNOSTICS">DIAGNOSTICS</a></li>
+  <li><a href="#BUGS">BUGS</a></li>
+  <li><a href="#SEE-ALSO">SEE ALSO</a></li>
+  <li><a href="#AUTHOR">AUTHOR</a></li>
+  <li><a href="#COPYRIGHT-AND-LICENSE">COPYRIGHT AND LICENSE</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>rrn - Regular expression ReName</p>
+
+<h1 id="SYNOPSIS">SYNOPSIS</h1>
+
+<p><b>rrn</b> [<i>options</i>] <i>FROM</i> [<i>TO</i>] [<i>FILES</i> | <i>@LISTFILE</i>]</p>
+
+<p><b>rrn</b> [<i>options</i>] [<b>-c</b>|<b>-f</b>] <i>CMD</i> [<i>FILES</i> | <i>@LISTFILE</i>]</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p><b>rrn</b> is a program which will rename a set of files using Perl-style regular expressions to specify how files should be renamed.</p>
+
+<p>The general syntax is as follows:</p>
 
 <ul>
 
-	<li><a href="#name">NAME</a></li>
-	<li><a href="#synopsis">SYNOPSIS</a></li>
-	<li><a href="#description">DESCRIPTION</a></li>
-	<li><a href="#options">OPTIONS</a></li>
-	<li><a href="#diagnostics">DIAGNOSTICS</a></li>
-	<li><a href="#bugs">BUGS</a></li>
-	<li><a href="#see_also">SEE ALSO</a></li>
-	<li><a href="#author">AUTHOR</a></li>
-	<li><a href="#copyright_and_license">COPYRIGHT AND LICENSE</a></li>
+<p><b>rrn</b> <i>FROM</i> <i>TO</i> [<i>FILES</i> | <i>@LISTFILE</i>]</p>
+
 </ul>
 
-<hr name="index" />
-</div>
-<!-- INDEX END -->
+<p>where <i>FROM</i> is the part of a filename that should be changed, <i>TO</i> is what it should be changed to, and [<i>FILES</i>] is an optional list of files to process. If no files are specified, all files in the current directory are processed.</p>
 
-<p>
-</p>
-<h1><a name="name">NAME</a></h1>
-<p>rrn - Regular expression ReName</p>
-<p>
-</p>
-<hr />
-<h1><a name="synopsis">SYNOPSIS</a></h1>
-<p><strong>rrn</strong> [<em>options</em>] <em>FROM</em> [<em>TO</em>] [<em>FILES</em> | <em>@LISTFILE</em>]</p>
-<p><strong>rrn</strong> [<em>options</em>] [<strong>-c</strong>|<strong>-f</strong>] <em>CMD</em> [<em>FILES</em> | <em>@LISTFILE</em>]</p>
-<p>
-</p>
-<hr />
-<h1><a name="description">DESCRIPTION</a></h1>
-<p><strong>rrn</strong> is a program which will rename a set of files using
-Perl-style regular expressions to specify how files should be
-renamed.</p>
-<p>The general syntax is as follows:</p>
-<p><strong>rrn</strong> <em>FROM</em> <em>TO</em> <em>[FILES | <em>@LISTFILE</em>]</em></p>
-<p>where <em>FROM</em> is the part of a filename that should be changed, <em>TO</em> is
-what it should be changed to, and [<em>FILES</em>] is an optional list of files
-to process.  If no files are specified, all files in the current
-directory are processed.</p>
-<p>Optionally, instead of (or in addition to) a list of <em>FILES</em>, you can also
-specify a <em>@LISTFILE</em>, where <em>LISTFILE</em> is a text file containing the list
-of files to rename, one per line. Use the <strong>-@</strong> option to inhibit this 
-behavior.</p>
-<p>The simplest instance is renaming all instances of a word in a
-filename to a different word.  For instance:</p>
+<p>Optionally, instead of (or in addition to) a list of <i>FILES</i>, you can also specify a <i>@LISTFILE</i>, where <i>LISTFILE</i> is a text file containing the list of files to rename, one per line. Use the <b>-@</b> option to inhibit this behavior.</p>
+
+<p>The simplest instance is renaming all instances of a word in a filename to a different word. For instance:</p>
+
+<ul>
+
 <p><code>rrn .htm .html</code></p>
-<p>is a quick and dirty way to rename files with the extension <em>.htm</em> to
-files with an extension of <em>.html</em>.  In this case it is very similar
-to the <code>rename(1)</code> command found in the util-linux package.</p>
-<p>You can also use perl-style regular expressions to specify the text
-that should be changed:</p>
-<p><code>rrn '\s+' ' '</code></p>
-<p>will replace strings of multiple spaces in a filename with a single
-space.  Another example might look like the following:</p>
-<p><code>rrn '([a-z])([A-Z])' '$1 $2'</code></p>
-<p>which would insert a space in between any lowercase letter followed by
-an upper case letter, thus changing a name like
-<em>DigitalCameraPictures</em> to <em>Digital Camera Pictures</em>.</p>
-<p>If you're unfamiliar with Perl-style regexps, have a look at the
-<code>perlre(1)</code>, <code>perlrequick(1)</code>, and/or <code>perlretut(1)</code> manpages that come with
-Perl.</p>
-<p>For those that are familiar with Perl, this script basically runs each
-file name through an <code>s/FROM/TO/g</code> command, and renaming it to
-whatever comes out.  Obviously, if the substitution results in the
-same name as the original, the file will not be renamed.</p>
-<p>
-</p>
-<hr />
-<h1><a name="options">OPTIONS</a></h1>
+
+</ul>
+
+<p>is a quick and dirty way to rename files with the extension <i>.htm</i> to files with an extension of <i>.html</i>. In this case it is very similar to the rename(1) command found in the util-linux package.</p>
+
+<p>You can also use perl-style regular expressions to specify the text that should be changed:</p>
+
+<ul>
+
+<p><code>rrn &#39;\s+&#39; &#39; &#39;</code></p>
+
+</ul>
+
+<p>will replace strings of multiple spaces in a filename with a single space. Another example might look like the following:</p>
+
+<ul>
+
+<p><code>rrn &#39;([a-z])([A-Z])&#39; &#39;$1 $2&#39;</code></p>
+
+</ul>
+
+<p>which would insert a space in between any lowercase letter followed by an upper case letter, thus changing a name like <i>DigitalCameraPictures</i> to <i>Digital Camera Pictures</i>.</p>
+
+<p>If you&#39;re unfamiliar with Perl-style regexps, have a look at the perlre(1), perlrequick(1), and/or perlretut(1) manpages that come with Perl.</p>
+
+<p>For those that are familiar with Perl, this script basically runs each file name through an <code>s/<i>FROM</i>/<i>TO</i>/g</code> command, and renaming it to whatever comes out. Obviously, if the substitution results in the same name as the original, the file will not be renamed.</p>
+
+<h1 id="OPTIONS">OPTIONS</h1>
+
 <dl>
-<dt><strong><a name="t" class="item"><strong>-t</strong></a></strong></dt>
 
+<dt id="t"><b>-t</b></dt>
 <dd>
-<p>Test.  Only shows what changes would be made, without actually making
-them</p>
+
+<p>Test. Only shows what changes would be made, without actually making them</p>
+
 </dd>
-<dt><strong><a name="a" class="item"><strong>-a</strong></a></strong></dt>
-
+<dt id="a"><b>-a</b></dt>
 <dd>
-<p>Ask.  Shows the changes that are about to be made, then ask whether to
-apply them</p>
+
+<p>Ask. Shows the changes that are about to be made, then ask whether to apply them</p>
+
 </dd>
-<dt><strong><a name="v" class="item"><strong>-v</strong></a></strong></dt>
-
+<dt id="v"><b>-v</b></dt>
 <dd>
-<p>Verbose.  Shows the names of files and what they're renamed to as it's
-renaming them.  By default <strong>rrn</strong> produces no output unless an error
-occurs</p>
+
+<p>Verbose. Shows the names of files and what they&#39;re renamed to as it&#39;s renaming them. By default <b>rrn</b> produces no output unless an error occurs</p>
+
 </dd>
-<dt><strong><a name="g" class="item"><strong>-g</strong></a></strong></dt>
-
+<dt id="g"><b>-g</b></dt>
 <dd>
-<p>No global.  Applies the substitution to only the first occurance of
-<em>FROM</em>.  This is like removing the /g from the end of the s// regexp
-in Perl.</p>
+
+<p>No global. Applies the substitution to only the first occurance of <i>FROM</i>. This is like removing the /g from the end of the s// regexp in Perl.</p>
+
 </dd>
-<dt><strong><a name="i" class="item"><strong>-i</strong></a></strong></dt>
-
+<dt id="i"><b>-i</b></dt>
 <dd>
-<p>Case insensitive.  Letters will be matched against the <em>FROM</em> pattern
-without regards to capitality.  Note that the matched portion of the
-name will still be replaced with the <em>TO</em> text exactly as you
-specified it.  Therefore, <code>rrn -i a b</code> will change a
-capital 'A' to a lowercase 'b'. This is like adding an /i to the end
-of the s// operator</p>
+
+<p>Case insensitive. Letters will be matched against the <i>FROM</i> pattern without regards to capitality. Note that the matched portion of the name will still be replaced with the <i>TO</i> text exactly as you specified it. Therefore, <code>rrn -i a b</code> will change a capital &#39;A&#39; to a lowercase &#39;b&#39;. This is like adding an /i to the end of the s// operator</p>
+
 </dd>
-<dt><strong><a name="e" class="item"><strong>-e</strong></a></strong></dt>
-
+<dt id="e"><b>-e</b></dt>
 <dd>
-<p>Don't change the file's extension.  (Extension is defined as the
-portion of the filename including and following the final '.' character in
-the file, if there is one)  This removes the extension before substitution,
-and replaces it after substitution, so your <em>FROM</em> pattern won't even
-match it.</p>
+
+<p>Don&#39;t change the file&#39;s extension. (Extension is defined as the portion of the filename including and following the final &#39;.&#39; character in the file, if there is one) This removes the extension before substitution, and replaces it after substitution, so your <i>FROM</i> pattern won&#39;t even match it.</p>
+
 </dd>
-<dt><strong><a name="c_cmd" class="item"><strong>-c</strong> <em>CMD</em></a></strong></dt>
-
+<dt id="c-CMD"><b>-c</b> <i>CMD</i></dt>
 <dd>
-<p>Perform <em>CMD</em>, which is a Perl expression.  If this option is
-specified, the <em>FROM</em> and <em>TO</em> parameters must be left off.  The
-original file name will be found in the $_ variable; your command
-should in some fashion modify that variable to what you want the new
-name to be.  <code>rrn -c 's/FROM/TO/g'</code> is equivalent to
-<code>rrn FROM TO</code></p>
-<p>Note that if the <strong>-e</strong> option is used, the extension will be removed
-from the $_ variable.  This way you can append something to the end of
-the name, and it will appear between the end of the filename and the
-start of the extension.</p>
+
+<p>Perform <i>CMD</i>, which is a Perl expression. If this option is specified, the <i>FROM</i> and <i>TO</i> parameters must be left off. The original file name will be found in the $_ variable; your command should in some fashion modify that variable to what you want the new name to be. <code>rrn -c &#39;s/FROM/TO/g&#39;</code> is equivalent to <code>rrn FROM TO</code></p>
+
+<p>Note that if the <b>-e</b> option is used, the extension will be removed from the $_ variable. This way you can append something to the end of the name, and it will appear between the end of the filename and the start of the extension.</p>
+
 </dd>
-<dt><strong><a name="f_cmd" class="item"><strong>-f</strong> <em>CMD</em></a></strong></dt>
-
+<dt id="f-CMD"><b>-f</b> <i>CMD</i></dt>
 <dd>
-<p>Similar to <strong>-c</strong>, but the result of the evaluated expression is used as the new
-name.  <code>rrn -f lc</code> is a quick way to convert a filename to all-lowercase
-characters.  (Or use <code>uc</code> for uppercase.) As with <strong>-c</strong>, the original filename
-is found in $_, and whatever function you call should access that variable.
-Many Perl builtin functions will implicitely acecss $_, so you can simply say,
-for instance, <code>lc</code> instead of <code>lc($_)</code>.</p>
-<p>Note that this doesn't have to be an actual function, it can be any
-expression that returns a value.  So you can say:</p>
-<p><code>rrn -f '$foo++ . &quot;_$_&quot;'</code></p>
+
+<p>Similar to <b>-c</b>, but the result of the evaluated expression is used as the new name. <code>rrn -f lc</code> is a quick way to convert a filename to all-lowercase characters. (Or use <code>uc</code> for uppercase.) As with <b>-c</b>, the original filename is found in $_, and whatever function you call should access that variable. Many Perl builtin functions will implicitely acecss $_, so you can simply say, for instance, <code>lc</code> instead of <code>lc($_)</code>.</p>
+
+<p>Note that this doesn&#39;t have to be an actual function, it can be any expression that returns a value. So you can say:</p>
+
+<ul>
+
+<p><code>rrn -f &#39;$foo++ . &quot;_$_&quot;&#39;</code></p>
+
+</ul>
+
 <p>to prepend a number before the filename.</p>
-</dd>
-<dt><strong><a name="e" class="item"><strong>-E</strong></a></strong></dt>
 
+</dd>
+<dt id="E"><b>-E</b></dt>
 <dd>
-<p>A distant cousin to <strong>-f</strong> and <strong>-c</strong>, if this is specified then the <em>FROM</em>
-parameter is a regex (as usual), but the <em>TO</em> parameter is a Perl expression,
-not a regex. Thus, it is somewhat of a hybrid between the <strong>-f</strong>/<strong>-c</strong> options
-and the defualt behaviour.  Thus,</p>
-<p><code>rrn -E '(^\d)' '$1 + 1'</code></p>
+
+<p>A distant cousin to <b>-f</b> and <b>-c</b>, if this is specified then the <i>FROM</i> parameter is a regex (as usual), but the <i>TO</i> parameter is a Perl expression, not a regex. Thus, it is somewhat of a hybrid between the <b>-f</b>/<b>-c</b> options and the defualt behaviour. Thus,</p>
+
+<ul>
+
+<p><code>rrn -E &#39;(^\d)&#39; &#39;$1 + 1&#39;</code></p>
+
+</ul>
+
 <p>will increment the number at the start of the filename.</p>
-<p>This option is equivalent to <code>rrn FROM '${\(TO)}'</code>.</p>
-</dd>
-<dt><strong><a name="b_init" class="item"><strong>-b</strong> <em>INIT</em></a></strong></dt>
 
+<p>This option is equivalent to <code>rrn FROM &#39;${\(TO)}&#39;</code>.</p>
+
+</dd>
+<dt id="b-INIT"><b>-b</b> <i>INIT</i></dt>
 <dd>
-<p>Evaluates the expression <em>INIT</em> before processing any files.  This is
-useful if you want to reference a variable in your command, but need
-it to be initialized to something first.  For instance:</p>
-<p><code>rrn -b '$foo = 1' -f '$foo++ . &quot;_$_&quot;'</code></p>
+
+<p>Evaluates the expression <i>INIT</i> before processing any files. This is useful if you want to reference a variable in your command, but need it to be initialized to something first. For instance:</p>
+
+<ul>
+
+<p><code>rrn -b &#39;$foo = 1&#39; -f &#39;$foo++ . &quot;_$_&quot;&#39;</code></p>
+
+</ul>
+
 <p>will prepend a number and an underscore to the filename.</p>
-</dd>
-<dt><strong><a name="__" class="item"><strong>-@</strong></a></strong></dt>
 
+</dd>
+<dt id="F"><b>-F</b></dt>
 <dd>
-<p>This will prevent <strong>rrn</strong> from treating files with names starting with an @
-symbol as list files.</p>
+
+<p>Force: Renames the file even if a file with the new name already exists. <b>Use with caution!</b></p>
+
+</dd>
+<dt id="pod"><b>-@</b></dt>
+<dd>
+
+<p>This will prevent <b>rrn</b> from treating files with names starting with an @ symbol as list files.</p>
+
 </dd>
 </dl>
-<p>
-</p>
-<hr />
-<h1><a name="diagnostics">DIAGNOSTICS</a></h1>
+
+<h1 id="DIAGNOSTICS">DIAGNOSTICS</h1>
+
 <dl>
-<dt><strong><a name="skipped_file_name_already_exists" class="item">Skipped <em>FILE</em>: <em>NAME</em> already exists</a></strong></dt>
 
+<dt id="Skipped-FILE:-NAME-already-exists">Skipped <i>FILE</i>: <i>NAME</i> already exists</dt>
 <dd>
-<p>A file wasn't renamed because the filename it was to be
-renamed to was already in use.</p>
+
+<p>A file wasn&#39;t renamed because the filename it was to be renamed to was already in use.</p>
+
 </dd>
-<dt><strong><a name="could_not_rename_file_error" class="item">Could not rename <em>FILE</em>: <em>ERROR</em></a></strong></dt>
-
+<dt id="Could-not-rename-FILE:-ERROR">Could not rename <i>FILE</i>: <i>ERROR</i></dt>
 <dd>
-<p>A file wasn't renamed because an OS error occured</p>
+
+<p>A file wasn&#39;t renamed because an OS error occured</p>
+
 </dd>
 </dl>
-<p>
-</p>
-<hr />
-<h1><a name="bugs">BUGS</a></h1>
-<p>Renaming a file to a name with different capitalization but otherwise the
-same under Windows will complain about the file already existing.</p>
-<p>Probably more, but I use this program all the time so the major ones should be
-long since squashed.</p>
-<p>
-</p>
-<hr />
-<h1><a name="see_also">SEE ALSO</a></h1>
-<p><code>rename(1)</code>, <code>perlre(1)</code>, <code>perlrequick(1)</code>, <code>perlretut(1)</code>, <code>perlfunc(1)</code>, and
-other documentation referenced in <code>perl(1)</code></p>
-<p>
-</p>
-<hr />
-<h1><a name="author">AUTHOR</a></h1>
-<p>Nathan Roberts &lt;<a href="mailto:nroberts@tardislabs.com">nroberts@tardislabs.com</a>&gt;</p>
-<p>
-</p>
-<hr />
-<h1><a name="copyright_and_license">COPYRIGHT AND LICENSE</a></h1>
-<p>Copyright 2009 by Nathan Roberts &lt;<a href="mailto:nroberts@tardislabs.com">nroberts@tardislabs.com</a>&gt;</p>
-<p>This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or (at
-your option) any later version.</p>
+
+<h1 id="BUGS">BUGS</h1>
+
+<p>Renaming a file to a name with different capitalization but otherwise the same under Windows will complain about the file already existing.</p>
+
+<p>Probably more, but I use this program all the time so the major ones should be long since squashed.</p>
+
+<h1 id="SEE-ALSO">SEE ALSO</h1>
+
+<p>rename(1), perlre(1), perlrequick(1), perlretut(1), perlfunc(1), and other documentation referenced in perl(1)</p>
+
+<h1 id="AUTHOR">AUTHOR</h1>
+
+<p>Nathan Roberts &lt;nroberts@tardislabs.com&gt;</p>
+
+<h1 id="COPYRIGHT-AND-LICENSE">COPYRIGHT AND LICENSE</h1>
+
+<p>Copyright 2012 by Nathan Roberts &lt;nroberts@tardislabs.com&gt;</p>
+
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
+
 
 </body>
 
 </html>
+
+
