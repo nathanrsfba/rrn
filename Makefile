@@ -22,6 +22,9 @@ $(BASE).html: $(POD)
 	pod2html --infile=$< --outfile=$@ --title=$(TITLE)
 	rm pod2htm*.tmp
 
+$(BASE).md: $(POD)
+	perldoc -MPod::Perldoc::ToMarkdown -d $@ $<
+
 index.html: index.mkd
 	markdown $< > $@
 
@@ -36,7 +39,6 @@ clean:
 	rm -f *.1 *.txt *.html *.zip *.gz *~
 
 doc: $(BASE).1 $(BASE).txt $(BASE).html
-web: doc index.html README LICENSE
 arc: $(BASE).zip $(BASE).tar.gz
 all: web arc
 
