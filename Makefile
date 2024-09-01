@@ -25,9 +25,6 @@ $(BASE).html: $(POD)
 $(BASE).md: $(POD)
 	perldoc -MPod::Perldoc::ToMarkdown -d $@ $<
 
-index.html: index.mkd
-	markdown $< > $@
-
 $(BASE).zip: $(ARCFILES)
 	rm -f $@
 	zip $@ $^
@@ -36,10 +33,12 @@ $(BASE).tar.gz: $(ARCFILES)
 	tar -c -v -f $@ $^
 
 clean:
-	rm -f *.1 *.txt *.html *.zip *.gz *~
+	rm -f *.1 *.txt *.html *.md *.zip *.gz *~
 
 doc: $(BASE).1 $(BASE).txt $(BASE).html
 arc: $(BASE).zip $(BASE).tar.gz
-all: web arc
+web: $(BASE).md
+
+all: doc web
 
 .PHONY: doc web arc clean all
