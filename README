@@ -1,31 +1,42 @@
-rrn: Regular expression ReName - v0.9.1 (2009-05-25)
-Copyright 2009 by Nathan Roberts <nroberts@tardislabs.com>
+rrn
+===
 
-rrn is a program that renames files using regular expressions. It is
-similar to programs such as 'rename' and 'prename' but with more 
+Regular expression ReName - v1.0.0 (2012-06-19)
+Copyright 2012 by Nathan Roberts <nroberts@tardislabs.com>
+
+`rrn` is a program that renames files using regular expressions. It is
+similar to programs such as `rename` and `prename` but with more 
 functionality.
 
-rrn is written in Perl, and should run under any system that has Perl
-5.8 installed.  Earlier versions may work but have not been tested.
+`rrn` is written in Perl, and should run under any system that has Perl
+5.8 installed. Earlier versions may work but have not been tested.
 
-INSTALLATION
+Downloads
+---------
 
-Copy rrn.pl to an appropriate bin directory (such as /usr/local/bin),
-rename it to 'rrn' (without the .pl) and chmod a+x rrn
+`rrn` may be downloaded from the releases page on the Github repo.
 
-Copy rrn.1 to an appropriate man directory (such as /usr/local/man/man1)
+Installation
+------------
+
+Copy `rrn.pl` to an appropriate bin directory (such as /usr/local/bin),
+rename it to `rrn` (without the .pl) and `chmod a+x rrn`.
+
+Copy `rrn.1` to an appropriate man directory (such as /usr/local/man/man1)
 
 Optionally copy other documentation to some appropriate directory
 
 Ideally this should be automated, but I can't figure out the 'accepted' way
-to do this
+to do this.
 
-DOCUMENTATION
+Documentation
+-------------
 
 See the rrn(1) manpage, or the text or HTML versions of same in rrn.txt or
-rrn.html, respectively.
+rrn.html.
 
-LICENSE
+License
+-------
 
-rrn is licensed under the GPL.  See the 'LICENSE' file for details.
+rrn is licensed under the GPL. See the `LICENSE` file for details.
 
