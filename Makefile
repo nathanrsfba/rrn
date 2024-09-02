@@ -33,7 +33,7 @@ $(BASE).tar.gz: $(ARCFILES)
 	tar -c -v -f $@ $^
 
 clean:
-	rm -f *.1 *.txt *.html *.md *.zip *.gz *~
+	rm -f *.1 *.txt *.html rrn.md *.zip *.gz *~
 
 doc: $(BASE).1 $(BASE).txt $(BASE).html
 arc: $(BASE).zip $(BASE).tar.gz
