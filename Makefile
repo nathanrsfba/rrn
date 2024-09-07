@@ -19,14 +19,7 @@ MANPREFIX=$(PREFIX)/man
 MANDIR=$(MANPREFIX)/man$(MANSECTION)
 
 VERSION=$(shell perl $(EXE) --version | sed "s/$(BASE) v//")
-
-foo:
-	echo $(VERSION)
-	echo $(PREFIX)
-	echo $(DOCPREFIX)
-	echo $(DOCDIR)
-	echo $(MANPREFIX)
-	echo $(MANDIR)
+DATE=$(shell perl $(EXE) | grep -m 1 $(BASE) | sed 's/.*(\(.*\).*)/\1/')
 
 .DEFAULT_GOAL=all
 
@@ -34,7 +27,7 @@ DOCFILES=$(BASE).txt $(BASE).html README.md LICENSE
 ARCFILES=$(EXE) $(MANPAGE) $(BASE).txt $(BASE).html README.md LICENSE
 
 $(MANPAGE): $(POD)
-	pod2man -c $(TITLE) -r $(VERSION) $< $@
+	pod2man -c $(TITLE) -r "$(NAME) v$(VERSION)" -d $(DATE) $< $@
 
 $(BASE).txt: $(POD)
 	pod2text $< $@
