@@ -19,15 +19,18 @@ Downloads
 Installation
 ------------
 
-Copy `rrn.pl` to an appropriate bin directory (such as /usr/local/bin),
-rename it to `rrn` (without the .pl) and `chmod a+x rrn`.
+`make install` should perform as expected. By default, it will install to
+`/usr/local`, but this can be overridden with `make install PREFIX=/usr` or
+suchlike.
 
-Copy `rrn.1` to an appropriate man directory (such as /usr/local/man/man1)
+By default, the binary is placed in $PREFIX/bin, with the `.pl` extension
+stripped, a folder is created in $PREFIX/doc for the documentation, and a
+manpage is placed in $PREFIX/man/man1. Take a look at the second variable block
+in the makefile for customization options.
 
-Optionally copy other documentation to some appropriate directory
-
-Ideally this should be automated, but I can't figure out the 'accepted' way
-to do this.
+`make uninstall` will remove these files. Note that if a custom prefix (or
+other variable) was specified at install, the same settings will need to be
+given for uninstall.
 
 Documentation
 -------------
