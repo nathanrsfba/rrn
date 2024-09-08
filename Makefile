@@ -10,7 +10,6 @@ POD=$(EXE)
 MANSECTION=1
 MANPAGE=$(BASE).$(MANSECTION)
 
-# PREFIX=/home/nathanr/foo
 PREFIX=/usr/local
 BINDIR=$(PREFIX)/bin
 DOCPREFIX=$(PREFIX)/doc
