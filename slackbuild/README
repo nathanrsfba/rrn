@@ -1,0 +1,2 @@
+rrn renames files using Perl-style regular expressions. It
+is similar to programs such as rename(1), but with more features. 

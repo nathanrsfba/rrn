@@ -20,6 +20,8 @@ MANDIR=$(MANPREFIX)/man$(MANSECTION)
 VERSION=$(shell perl $(EXE) --version | sed "s/$(BASE) v//")
 DATE=$(shell perl $(EXE) | grep -m 1 $(BASE) | sed 's/.*(\(.*\).*)/\1/')
 
+OUTPUT=$(CURDIR)
+
 .DEFAULT_GOAL=all
 
 DOCFILES=$(BASE).txt $(BASE).html README.md LICENSE
@@ -46,7 +48,8 @@ $(BASE).tar.gz: $(ARCFILES)
 	tar -c -v -f $@ $^
 
 clean:
-	rm -f $(MANPAGE) *.html *.txt rrn.md *.zip *.gz *~
+	rm -f $(MANPAGE) *.html *.txt rrn.md *.zip *.gz *.t?z *~ \
+		slackbuild/*~ slackbuild/*.tar.gz slackbuild/*.t?z
 
 doc: $(MANPAGE) $(BASE).txt $(BASE).html
 arc: $(BASE).zip $(BASE).tar.gz
@@ -60,6 +63,12 @@ install: doc
 uninstall:
 	rm -rf $(BINDIR)/$(BASE) $(DOCDIR) $(MANDIR)/$(MANPAGE)
 
+slackbuild/v$(VERSION).tar.gz: Makefile $(ARCFILES)
+	tar cvaf $@ --transform=s/^/$(BASE)-$(VERSION)\\// Makefile $(ARCFILES)
+
+slackpkg: slackbuild/v$(VERSION).tar.gz
+	VERSION=$(VERSION) OUTPUT=$(realpath $(OUTPUT)) sh slackbuild/rrn.SlackBuild 
+
 all: doc web
 
-.PHONY: doc web arc clean all install uninstall
+.PHONY: doc web arc clean all install uninstall slackpkg
