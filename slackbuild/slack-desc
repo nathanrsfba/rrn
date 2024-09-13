@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
    |-----handy-ruler------------------------------------------------------|
-rrn: rrn (Rename files using Perl regular expressions)
+rrn: rrn renames files using Perl-style regular expressions. It is similar
+rrn: to programs such as rename(1), but with more features.
 rrn:
-rrn: rrn renames files using Perl-style regular expressions. It
-rrn: is similar to programs such as rename(1), but with more features. 
-rrn:
-rrn:
-rrn:
-rrn:
+rrn: It can perform a wide variety of substitutions, from basic text
+rrn: substitutions, to substitutions making use of almost any Perl regex
+rrn: syntax, to even using Perl expressions in substitutions. It includes
+rrn: options to specify case sensitivity, preserve file extensions, and
+rrn: show changes before they're made.
 rrn:
 rrn:
 rrn:

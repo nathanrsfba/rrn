@@ -1,2 +1,7 @@
 rrn renames files using Perl-style regular expressions. It
-is similar to programs such as rename(1), but with more features. 
+is similar to programs such as rename(1), but with more features.
+
+It can perform a wide variety of substitutions, from basic text substitutions,
+to substitutions making use of almost any Perl regex syntax, to even using
+Perl expressions in substitutions. It includes options to specify case
+sensitivity, preserve file extensions, and show changes before they're made.
