@@ -16,6 +16,8 @@ Downloads
 
 `rrn` may be downloaded from the [releases page][1] on the Github repo.
 
+[1]: https://github.com/nathanrsfba/rrn/tags
+
 Installation
 ------------
 
@@ -38,10 +40,10 @@ Documentation
 See the rrn(1) manpage, or the text or HTML versions of same in rrn.txt or
 rrn.html, or the [Markdown version][2] on the Github repo.
 
+[2]: https://github.com/nathanrsfba/rrn/blob/main/rrn.md
+
 License
 -------
 
 rrn is licensed under the GPL. See the `LICENSE` file for details.
 
-[1]: https://github.com/nathanrsfba/rrn/tags
-[2]: https://github.com/nathanrsfba/rrn/blob/main/rrn.md
