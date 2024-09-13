@@ -22,7 +22,8 @@ DATE=$(shell perl $(EXE) | grep -m 1 $(BASE) | sed 's/.*(\(.*\).*)/\1/')
 
 OUTPUT=$(CURDIR)
 
-GARBAGE=*.html *.txt rrn.md *.zip *.gz *.t?z *~ .*~ *.bak *.swp
+DISTGARBAGE=*.zip *.gz *.t?z *~ .*~ *.bak *.swp
+GARBAGE=*.html *.txt rrn.md $(DISTGARBAGE)
 
 .DEFAULT_GOAL=all
 
@@ -49,9 +50,15 @@ $(BASE).zip: $(ARCFILES)
 $(BASE).tar.gz: $(ARCFILES)
 	tar -c -v -f $@ $^
 
+# Remove garbage, including anything make regenerates
 clean:
 	rm -f $(GARBAGE)
 	cd slackbuild; rm -f $(GARBAGE)
+
+# Remove garbage, leaving anything shipped in the repo
+distclean:
+	rm -f $(DISTGARBAGE)
+	cd slackbuild; rm -f $(DISTGARBAGE)
 
 doc: $(MANPAGE) $(BASE).txt $(BASE).html
 arc: $(BASE).zip $(BASE).tar.gz
@@ -73,4 +80,4 @@ slackpkg: slackbuild/v$(VERSION).tar.gz
 
 all: doc web
 
-.PHONY: doc web arc clean all install uninstall slackpkg
+.PHONY: doc web arc clean distclean all install uninstall slackpkg
