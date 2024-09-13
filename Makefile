@@ -22,6 +22,8 @@ DATE=$(shell perl $(EXE) | grep -m 1 $(BASE) | sed 's/.*(\(.*\).*)/\1/')
 
 OUTPUT=$(CURDIR)
 
+GARBAGE=*.html *.txt rrn.md *.zip *.gz *.t?z *~ .*~ *.bak *.swp
+
 .DEFAULT_GOAL=all
 
 DOCFILES=$(BASE).txt $(BASE).html README.md LICENSE
@@ -48,8 +50,8 @@ $(BASE).tar.gz: $(ARCFILES)
 	tar -c -v -f $@ $^
 
 clean:
-	rm -f $(MANPAGE) *.html *.txt rrn.md *.zip *.gz *.t?z *~ \
-		slackbuild/*~ slackbuild/*.tar.gz slackbuild/*.t?z
+	rm -f $(GARBAGE)
+	cd slackbuild; rm -f $(GARBAGE)
 
 doc: $(MANPAGE) $(BASE).txt $(BASE).html
 arc: $(BASE).zip $(BASE).tar.gz
