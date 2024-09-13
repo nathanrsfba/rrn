@@ -42,6 +42,21 @@ rrn.html, or the [Markdown version][2] on the Github repo.
 
 [2]: https://github.com/nathanrsfba/rrn/blob/main/rrn.md
 
+SlackBuild
+----------
+
+Since I'm one of *those* people, there's a SlackBuild script included that
+can build a Slackware package. It's more-or-less a
+slackbuilds.org-compatible script, and accepts the standard environment
+variables. In particular, if you're generating a package for distribution,
+setting `TAG` to your initials is the convention.
+
+You can run `make slackpkg` to call this script, which will generate a
+package in the current directory. This will also generate a tarball with the
+files needed to build the package, which the SlackBuild script will use. You
+can pass options to the script on the make command line as well, for
+instance, `make slackpkg TAG=nr`.
+
 License
 -------
 
